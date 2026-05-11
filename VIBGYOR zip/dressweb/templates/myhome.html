@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Home</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='myhome.css') }}">
+</head>
+
+<body>
+<!-- VIDEO BACKGROUND -->
+<video autoplay muted loop id="bgVideo">
+    <source src="/static/animation.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<img src="{{ url_for('static', filename='logo.jpeg') }}" alt="VIBGYOR Logo" class="logo">
+
+<div style="text-align:center;">
+    <div class="title">My Home</div>
+</div>
+
+<!-- OPTIONS -->
+<div class="grid">
+
+    <div class="box" onclick="go('wardrobe')">My Wardrobe</div>
+    <div class="box" onclick="go('history')">My History</div>
+
+    <div class="box" onclick="go('color')">Color Theory</div>
+    <div class="box" onclick="go('social')">Social Sharing</div>
+    <div class="box" onclick="go('outfit')">New Outfit</div>
+
+</div>
+
+<!-- RECOMMENDATION FOR WOMEN-->
+<div class="section">
+    <h3>Recommendation FOR WOMEN</h3>
+    <div class="scroll-container">
+        <div class="scroll">
+            <!-- ADD YOUR IMAGES -->
+            <img src="{{ url_for('static',filename = 'recom1.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recom 2.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recom 3.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recom 4.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recom 5.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recom 6.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recom 7.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recom 8.png' ) }}">
+            <img src="{{ url_for('static',filename = 'recom 9.webp' ) }}">
+            <img src="{{ url_for('static',filename = 'tra1 pic.jpeg' ) }}">
+            <img src="{{ url_for('static',filename = 'tra5.jpeg' ) }}">
+            <img src="{{ url_for('static',filename = 'tra3.jpeg' ) }}">
+            <img src="{{ url_for('static',filename = 'tra4.jpeg' ) }}">
+            <!-- DUPLICATE for smooth loop -->
+            <img src="{{ url_for('static',filename = 'recom1.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recom 2.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recom 3.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recom 4.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recom 5.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recom 6.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recom 7.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recom 8.png' ) }}">
+            <img src="{{ url_for('static',filename = 'recom 9.webp' ) }}">
+            <img src="{{ url_for('static',filename = 'tra1 pic.jpeg' ) }}">
+            <img src="{{ url_for('static',filename = 'tra5.jpeg' ) }}">
+            <img src="{{ url_for('static',filename = 'tra3.jpeg' ) }}">
+            <img src="{{ url_for('static',filename = 'tra4.jpeg' ) }}">
+        </div>
+    </div>
+</div>
+<br><br>
+<!-- TRENDINGS FOR WOMEN-->
+<div class="section">
+    <h3>Trendings FOR WOMEN</h3>
+    <div class="scroll-container">
+        <div class="scroll">
+            <img src="{{ url_for('static',filename = 'trend 1.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trend 2.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trend 3.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trend 4.png' ) }}">
+            <img src="{{ url_for('static',filename = 'trend 5.png' ) }}">
+            <img src="{{ url_for('static',filename = 'trend 6.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trend 7.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trend 8.webp' ) }}">
+            <img src="{{ url_for('static',filename = 'trend 9.webp' ) }}">
+            
+
+            <!-- DUPLICATE -->
+            <img src="{{ url_for('static',filename = 'trend 1.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trend 2.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trend 3.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trend 4.png' ) }}">
+            <img src="{{ url_for('static',filename = 'trend 5.png' ) }}">
+            <img src="{{ url_for('static',filename = 'trend 6.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trend 7.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trend 8.webp' ) }}">
+            <img src="{{ url_for('static',filename = 'trend 9.webp' ) }}">
+        </div>
+    </div>
+</div>
+<br><br>
+<!-- RECOMMENDATION FOR MEN-->
+<div class="section">
+    <h3>Recommendation FOR MEN</h3>
+    <div class="scroll-container">
+        <div class="scroll">
+            <!-- ADD YOUR IMAGES -->
+            <img src="{{ url_for('static',filename = 'recomm 1.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomm 2.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomm 3.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomm 4.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomm 5.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomm 6.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomm 7.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomm 8.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomm 9.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'tram1.jpeg' ) }}">
+            <img src="{{ url_for('static',filename = 'tram2.jpeg' ) }}">
+            <img src="{{ url_for('static',filename = 'tram3.jpeg' ) }}">
+            <!-- DUPLICATE for smooth loop -->
+            <img src="{{ url_for('static',filename = 'recomm 10.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomm 11.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomm 3.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomm 4.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomm 5.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomm 6.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomm 7.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomm 8.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomm 9.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'tram1.jpeg' ) }}">
+            <img src="{{ url_for('static',filename = 'tram2.jpeg' ) }}">
+            <img src="{{ url_for('static',filename = 'tram3.jpeg' ) }}">
+        </div>
+    </div>
+</div>
+<br><br>
+<!-- TRENDINGS FOR MEN -->
+<div class="section">
+    <h3>Trendings FOR MEN</h3>
+    <div class="scroll-container">
+        <div class="scroll">
+            <img src="{{ url_for('static',filename = 'trendm 1.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendm 2.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendm 3.png' ) }}">
+            <img src="{{ url_for('static',filename = 'trendm 4.png' ) }}">
+            <img src="{{ url_for('static',filename = 'trendm 5.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendm 6.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendm 7.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendm 8.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendm 9.jpg' ) }}">
+
+            <!-- DUPLICATE -->
+            <img src="{{ url_for('static',filename = 'trendm 10.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendm 11.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendm 3.png' ) }}">
+            <img src="{{ url_for('static',filename = 'trendm 4.png' ) }}">
+            <img src="{{ url_for('static',filename = 'trendm 5.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendm 6.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendm 7.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendm 8.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendm 9.jpg' ) }}">
+        </div>
+    </div>
+</div>
+<br><br>
+<!-- RECOMMENDATION FOR KIDS-->
+<div class="section">
+    <h3>Recommendation FOR KIDS</h3>
+    <div class="scroll-container">
+        <div class="scroll">
+            <!-- ADD YOUR IMAGES -->
+            <img src="{{ url_for('static',filename = 'recomk 1.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomk 2.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomk 3.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomk 4.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomk 5.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomk 6.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomk 7.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomk 8.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomk 1.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trak1.jpeg' ) }}">
+            <img src="{{ url_for('static',filename = 'trak2.jpeg' ) }}">
+            
+            <!-- DUPLICATE for smooth loop -->
+            <img src="{{ url_for('static',filename = 'recomk 1.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomk 2.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomk 3.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomk 4.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomk 5.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomk 6.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomk 7.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomk 8.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trak1.jpeg' ) }}">
+            <img src="{{ url_for('static',filename = 'trak2.jpeg' ) }}">
+            
+          
+        </div>
+    </div>
+</div>
+<br><br>
+<!-- TRENDINGS FOR KIDS-->
+<div class="section">
+    <h3>Trendings FOR KIDS</h3>
+    <div class="scroll-container">
+        <div class="scroll">
+            <img src="{{ url_for('static',filename = 'trendk 1.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendk 2.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendk 3.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendk 4.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendk 5.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendk 6.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendk 7.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendk 8.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendk 6.jpg' ) }}">
+
+            <!-- DUPLICATE -->
+            <img src="{{ url_for('static',filename = 'trendk 1.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendk 2.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendk 3.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendk 4.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendk 5.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendk 6.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendk 7.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendk 8.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendk 4.jpg' ) }}">
+        </div>
+    </div>
+</div>
+<br><br>
+
+<!-- RECOMMENDATION FOR couple-->
+<div class="section">
+    <h3>Recommendation FOR COUPLE</h3>
+    <div class="scroll-container">
+        <div class="scroll">
+            <!-- ADD YOUR IMAGES -->
+            <img src="{{ url_for('static',filename = 'recomcop 1.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomcop 2.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomcop 3.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomcop 4.png' ) }}">
+            <img src="{{ url_for('static',filename = 'recomcop 10.png' ) }}">
+            <img src="{{ url_for('static',filename = 'recomcop 6.png' ) }}">
+            <img src="{{ url_for('static',filename = 'recomcop 7.png' ) }}">
+            <img src="{{ url_for('static',filename = 'recomcop 8.png' ) }}">
+            <img src="{{ url_for('static',filename = 'recomcop 11.png' ) }}">
+            <!-- DUPLICATE for smooth loop -->
+            <img src="{{ url_for('static',filename = 'recomcop 1.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomcop 2.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomcop 3.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'recomcop 4.png' ) }}">
+            <img src="{{ url_for('static',filename = 'recomcop 9.png' ) }}">
+            <img src="{{ url_for('static',filename = 'recomcop 6.png' ) }}">
+            <img src="{{ url_for('static',filename = 'recomcop 7.png' ) }}">
+            <img src="{{ url_for('static',filename = 'recomcop 8.png' ) }}">
+          
+        </div>
+    </div>
+</div>
+<br><br>
+<!-- TRENDINGS FOR COUPLE-->
+<div class="section">
+    <h3>Trendings FOR COUPLE</h3>
+    <div class="scroll-container">
+        <div class="scroll">
+            <img src="{{ url_for('static',filename = 'trendcop 1.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendcop 2.png' ) }}">
+            <img src="{{ url_for('static',filename = 'trendcop 3.png' ) }}">
+            <img src="{{ url_for('static',filename = 'trendcop 4.png' ) }}">
+            <img src="{{ url_for('static',filename = 'trendcop 5.png' ) }}">
+            <img src="{{ url_for('static',filename = 'trendcop 6.png' ) }}">
+            <img src="{{ url_for('static',filename = 'trendcop 7.png' ) }}">
+            <img src="{{ url_for('static',filename = 'trendcop 8.png' ) }}">
+            <img src="{{ url_for('static',filename = 'trendcop 10.png' ) }}">
+
+            <!-- DUPLICATE -->
+            <img src="{{ url_for('static',filename = 'trendcop 1.jpg' ) }}">
+            <img src="{{ url_for('static',filename = 'trendcop 2.png' ) }}">
+            <img src="{{ url_for('static',filename = 'trendcop 3.png' ) }}">
+            <img src="{{ url_for('static',filename = 'trendcop 4.png' ) }}">
+            <img src="{{ url_for('static',filename = 'trendcop 5.png' ) }}">
+            <img src="{{ url_for('static',filename = 'trendcop 6.png' ) }}">
+            <img src="{{ url_for('static',filename = 'trendcop 7.png' ) }}">
+            <img src="{{ url_for('static',filename = 'trendcop 8.png' ) }}">
+            <img src="{{ url_for('static',filename = 'trendcop 9.png' ) }}">
+            <img src="{{ url_for('static',filename = 'trendcop 11.png' ) }}">
+        </div>
+    </div>
+</div>
+<div class="contact">
+    <p>📧 vibgyor26@gmail.com</p>
+    <p>📱 +91 98765 43210</p>
+    <p>📸 Instagram: @vibgyor_ai</p>
+    <p>📘 Facebook: Vibgyor AI</p>
+</div>
+
+<script>
+function go(page) {
+    window.location.href = "/" + page ;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VIBGYOR Signup</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- VIDEO BACKGROUND -->
+<video autoplay muted loop id="bgVideo">
+    <source src="{{ url_for('static', filename='animation.mp4') }}" type="video/mp4">
+</video>
+<img src="{{ url_for('static', filename='logo.jpeg') }}" alt="VIBGYOR Logo" class="logo">
+
+<div class="auth-box">
+
+    <h2>Create Account</h2>
+    <p class="subtitle">Join VIBGYOR and explore fashion</p>
+
+    <!-- FORM -->
+    <form action="/signup" method="POST">
+        <input type="email" name="email" placeholder="Email ID" required>
+        <input type="password" name="password" placeholder="Password" required>
+
+        <button type="submit" class="primary-btn">Sign Up</button>
+    </form>
+
+    <div class="divider">
+        <span>or continue with</span>
+    </div>
+
+    <!-- GOOGLE -->
+    <div class="google-container">
+        <a href="/login/google" class="google-btn">
+            <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" class="google-icon">
+            Continue with Google
+        </a>
+    </div>
+
+    <!-- LOGIN LINK -->
+    <p class="bottom-text">
+        Already have an account?
+        <a href="/login">Login</a>
+    </p>
+
+</div>
+
+</body>
+</html>
+<style>/* Background video */
+#bgVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+}
+
+/* Glass effect box */
+.auth-box {
+    width: 360px;
+    margin: 100px auto;
+    padding: 35px;
+    border-radius: 15px;
+    backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    text-align: center;
+    color: white;
+}
+
+/* Subtitle */
+.subtitle {
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: #ddd;
+}
+
+/* Inputs */
+.auth-box input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+}
+
+/* Primary button */
+.primary-btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg, #ff7e5f, #feb47b);
+    border: none;
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* Divider */
+.divider {
+    margin: 20px 0;
+    color: #ddd;
+}
+
+/* Google button */
+.google-container {
+    display: flex;
+    justify-content: center;
+}
+
+.google-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    background: white;
+    color: black;
+    text-decoration: none;   /* 🔥 no underline */
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+/* Google icon */
+.google-icon {
+    width: 20px;
+}
+
+/* Bottom text */
+.bottom-text {
+    margin-top: 20px;
+}
+
+/* Link style */
+.bottom-text a {
+    color: #fff;
+    text-decoration: underline;
+}
+.logo{
+    position:fixed;
+    top:15px;
+    left:20px;
+
+    width:110px;
+    height:auto;
+
+    z-index:999;
+}
+p{
+    color: black;
+}
+</style>

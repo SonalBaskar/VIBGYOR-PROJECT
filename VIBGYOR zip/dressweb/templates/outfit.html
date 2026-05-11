@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>VIBGYOR NEW OUTFIT Advisor</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+background: radial-gradient(circle at top, #1e1e2f, #0f0f1a);
+overflow:hidden;
+}
+.logo{
+    position:fixed;
+    top:15px;
+    left:20px;
+
+    width:110px;
+    height:auto;
+
+    z-index:999;
+}
+/* FLOATING LIGHTS */
+body::before, body::after{
+content:"";
+position:absolute;
+width:300px;
+height:300px;
+border-radius:50%;
+filter:blur(120px);
+animation: float 8s infinite alternate;
+}
+
+body::before{
+background:#ff6ec4;
+top:10%;
+left:10%;
+}
+
+body::after{
+background:#7873f5;
+bottom:10%;
+right:10%;
+}
+
+@keyframes float{
+0%{transform:translateY(0px);}
+100%{transform:translateY(50px);}
+}
+
+/* HEADER */
+.header{
+text-align:center;
+font-size:32px;
+font-weight:700;
+margin-top:30px;
+
+/* GRADIENT TEXT */
+background: linear-gradient(90deg,#362b63,#3f3a55,#565267,#362f65);
+
+color:transparent;
+animation: glow 3s infinite alternate;
+}
+
+@keyframes glow{
+from{text-shadow:0 0 10px #ff7eb3;}
+to{text-shadow:0 0 25px #42e695;}
+}
+
+/* CENTER */
+.container{
+display:flex;
+justify-content:center;
+align-items:center;
+height:85vh;
+}
+
+/* CARD */
+.card{
+width:420px;
+padding:30px;
+border-radius:20px;
+
+/* GLASS */
+background: rgba(255,255,255,0.08);
+backdrop-filter: blur(20px);
+
+box-shadow:0 20px 50px rgba(0,0,0,0.5);
+transition:0.4s;
+color:rgb(14, 1, 1);
+}
+
+/* HOVER DEPTH */
+.card:hover{
+transform:translateY(-10px) scale(1.02);
+box-shadow:0 30px 70px rgba(0,0,0,0.7);
+}
+
+select{
+width:100%;
+padding:12px;
+margin-top:12px;
+border-radius:12px;
+border:none;
+outline:none;
+
+/* FIXED VISIBILITY */
+background:rgba(255,255,255,0.9);
+color:#333;
+font-size:14px;
+font-weight:500;
+}
+
+/* Dropdown options (important) */
+select option{
+color:#000;
+background:#fff;
+}
+
+/* SKIN PREVIEW */
+.select-box{
+display:flex;
+align-items:center;
+gap:10px;
+margin-top:15px;
+}
+
+.preview{
+width:35px;
+height:35px;
+border-radius:50%;
+border:2px solid white;
+box-shadow:0 0 10px white;
+}
+
+/* BUTTON */
+button{
+margin-top:20px;
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+
+background: linear-gradient(45deg,#ff7eb3,#ff758c,#42e695);
+color:rgb(233, 226, 226);
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.08);
+box-shadow:0 0 20px #ff7eb3,0 0 30px #42e695;
+}
+
+/* COLORS */
+.colors{
+display:flex;
+flex-wrap:wrap;
+gap:12px;
+margin-top:20px;
+justify-content:center;
+}
+#bgVideo{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-2;
+}
+/* COLOR ORBS */
+.color-box{
+width:45px;
+height:45px;
+border-radius:50%;
+position:relative;
+cursor:pointer;
+transition:0.4s;
+}
+
+/* GLOW EFFECT */
+.color-box::before{
+content:"";
+position:absolute;
+inset:0;
+border-radius:50%;
+filter:blur(10px);
+opacity:0;
+transition:0.4s;
+}
+
+.color-box:hover{
+transform:scale(1.3);
+}
+
+.color-box:hover::before{
+opacity:1;
+background:inherit;
+}
+
+/* RESULT */
+.result{
+margin-top:20px;
+text-align:center;
+}
+h1{
+    color: white;
+}
+</style>
+</head>
+
+<body>
+<video autoplay muted loop id="bgVideo">
+    <source src="/static/blue gown.mp4" type="video/mp4">
+</video>
+
+<div class="header"> </div>
+
+<img src="{{ url_for('static', filename='logo.jpeg') }}" alt="VIBGYOR Logo" class="logo">
+
+<div class="container">
+<div class="card">
+<h1>Smart Outfit Advisor</h1>
+<select id="type" onchange="loadCountries()">
+<option value="">Dress Type</option>
+<option value="traditional">Traditional</option>
+<option value="casual">Casual</option>
+<option value="formal">Formal</option>
+<option value="party">Party</option>
+<option value="office">office</option>
+<option value="Date">Date</option>
+<option value="Get together">Get together</option>
+<option value="Farewell">Farewell</option>
+<option value="Interview">Interview</option>
+<option value="Valentine Day">Valentine Day</option>
+
+</select>
+
+<select id="country" style="display:none;"></select>
+
+<div class="select-box">
+<div id="skinPreview" class="preview"></div>
+<select id="skin" onchange="updateSkinPreview()">
+<option value="">Skin Tone</option>
+<option value="fair">Fair</option>
+<option value="light">Light</option>
+<option value="medium">Medium</option>
+<option value="olive">Olive</option>
+<option value="brown">Brown</option>
+<option value="dark">Dark</option>
+</select>
+</div>
+
+<button onclick="suggest()">Get Suggestion</button>
+
+<div id="result" class="result"></div>
+
+</div>
+</div>
+
+<script>
+
+/* 21 COUNTRIES */
+const countries = [
+"India","China","Spain","Italy","Greece","Norway","Scotland",
+"Saudi Arabia","Turkey","Iran",
+"Philippines","Mongolia","Nepal","Bhutan",
+"Nigeria","Morocco","Kenya",
+"Mexico","Peru","Brazil","France"
+];
+
+/* LOAD COUNTRIES */
+function loadCountries(){
+let type=document.getElementById("type").value;
+let box=document.getElementById("country");
+
+if(type==="traditional"){
+box.style.display="block";
+box.innerHTML="<option>Select Country</option>";
+countries.forEach(c=>box.innerHTML+=`<option>${c}</option>`);
+}else{
+box.style.display="none";
+}
+}
+
+/* SKIN PREVIEW */
+const skinMap={
+fair:"#ffe0bd",
+light:"#f1c27d",
+medium:"#c68642",
+olive:"#a36f40",
+brown:"#8d5524",
+dark:"#5d3a1a"
+};
+
+function updateSkinPreview(){
+let s=document.getElementById("skin").value;
+document.getElementById("skinPreview").style.background=skinMap[s]||"transparent";
+}
+
+/* UNIQUE COLOR ENGINE */
+function getColors(country,skin){
+
+const palette={
+India:{
+fair:["#ff4d4d","#ff9999","#ffcccb","#ffd700","#ff66b2","#ffb6c1","#ffa07a","#ff69b4","#ffcc00","#ff9966"],
+medium:["#cc3300","#ff6600","#e67300","#cc0066","#ff0066","#cc5200","#ff8533","#b30059","#cc4400","#ff944d"],
+dark:["#800000","#993300","#660033","#800040","#4d0000","#660000","#4d2600","#800000","#4d0026","#331a00"]
+},
+SaudiArabia:{
+fair:["#006400","#228b22","#32cd32","#7cfc00","#98fb98","#f5f5dc","#fff8dc","#f0e68c","#daa520","#ffd700"],
+medium:["#004d00","#006400","#228b22","#556b2f","#6b8e23","#c2b280","#d2b48c","#bdb76b","#b8860b","#cd853f"],
+dark:["#003300","#004d00","#2f4f4f","#3b5323","#4b5320","#8b7355","#6f4e37","#5c4033","#4d322c","#3b2f2f"]
+},
+Turkey:{
+fair:["#ff0000","#ff4d4d","#ff9999","#ffffff","#ffe4e1","#ffd700","#ffa07a","#ff7f50","#ff6347","#ffb347"],
+medium:["#cc0000","#cc3333","#cc6666","#fff5ee","#ffdead","#e9967a","#cd5c5c","#b22222","#ff8c00","#e67300"],
+dark:["#800000","#660000","#4d0000","#f5deb3","#deb887","#a0522d","#8b4513","#5c3317","#3e2723","#2b1b17"]
+},
+Iran:{
+fair:["#228b22","#32cd32","#7fff00","#ffffff","#ff0000","#ff6666","#ff9999","#98fb98","#90ee90","#adff2f"],
+medium:["#006400","#228b22","#556b2f","#f0fff0","#cc0000","#cc3333","#cc6666","#66cdaa","#3cb371","#2e8b57"],
+dark:["#003300","#004d00","#2f4f4f","#8b0000","#660000","#4d0000","#006400","#2e8b57","#355e3b","#1b3a2f"]
+},
+Philippines:{
+fair:["#0038a8","#0057e7","#1e90ff","#ffffff","#ff0000","#ff4d4d","#ffd700","#ffcc00","#ffeb3b","#87cefa"],
+medium:["#002b80","#004080","#0066cc","#f5f5f5","#cc0000","#cc3333","#e6b800","#d4af37","#cddc39","#4682b4"],
+dark:["#001a4d","#00264d","#003366","#dcdcdc","#800000","#660000","#b8860b","#8b7500","#808000","#2f4f4f"]
+},
+Mongolia:{
+fair:["#c8102e","#ff4d4d","#ff9999","#005bbb","#3399ff","#66b3ff","#ffd700","#ffcc00","#ffeb99","#87ceeb"],
+medium:["#a50f2d","#cc3333","#cc6666","#004080","#0066cc","#3385ff","#e6b800","#d4af37","#cdaa7d","#4682b4"],
+dark:["#800000","#660000","#4d0000","#00264d","#003366","#1a4d80","#b8860b","#8b7500","#8b4513","#2f4f4f"]
+},
+Nepal:{
+fair:["#dc143c","#ff4d4d","#ff9999","#00008b","#1e90ff","#87cefa","#ffd700","#ffcc00","#ffeb3b","#ffffff"],
+medium:["#b22222","#cc3333","#cc6666","#000066","#004080","#4682b4","#e6b800","#d4af37","#cdaa7d","#f5f5f5"],
+dark:["#800000","#660000","#4d0000","#00004d","#00264d","#2f4f4f","#b8860b","#8b7500","#8b4513","#dcdcdc"]
+},
+Bhutan:{
+fair:["#ffcc00","#ffd700","#ffeb3b","#ff8c00","#ff4500","#ffffff","#f5f5dc","#ffe4b5","#fafad2","#fffacd"],
+medium:["#e6b800","#d4af37","#cdaa7d","#cc7000","#cc5500","#f5deb3","#deb887","#d2b48c","#c2b280","#eee8aa"],
+dark:["#b8860b","#8b7500","#8b4513","#994d00","#804000","#8b7355","#6f4e37","#5c4033","#4d322c","#3b2f2f"]
+},
+Nigeria:{
+fair:["#008751","#00a86b","#00ff7f","#ffffff","#e0ffe0","#ccffcc","#b2ffb2","#66ff99","#33cc66","#009966"],
+medium:["#006b3c","#008751","#228b22","#f0fff0","#ccffcc","#99cc99","#66b266","#339966","#26734d","#1f5c3a"],
+dark:["#004d26","#006633","#2f4f4f","#e6ffe6","#99cc99","#669966","#336633","#264d26","#1a331a","#0d1a0d"]
+},
+Morocco:{
+fair:["#c1272d","#ff4d4d","#ff9999","#006233","#228b22","#32cd32","#ffd700","#ffcc00","#ffeb3b","#f5f5dc"],
+medium:["#a61b1b","#cc3333","#cc6666","#004d26","#006633","#228b22","#e6b800","#d4af37","#cdaa7d","#eee8aa"],
+dark:["#800000","#660000","#4d0000","#003300","#004d26","#2f4f4f","#b8860b","#8b7500","#8b4513","#3b2f2f"]
+},
+Kenya:{
+fair:["#000000","#333333","#ff0000","#ff4d4d","#008000","#32cd32","#ffffff","#f5f5f5","#dcdcdc","#808080"],
+medium:["#1a1a1a","#333333","#cc0000","#cc3333","#006400","#228b22","#e6e6e6","#cccccc","#999999","#666666"],
+dark:["#000000","#1a1a1a","#800000","#660000","#004d00","#006400","#cccccc","#999999","#666666","#333333"]
+},
+Mexico:{
+fair:["#006847","#32cd32","#66ff66","#ffffff","#ff0000","#ff4d4d","#ffd700","#ffcc00","#ffeb3b","#ffa07a"],
+medium:["#004d33","#228b22","#339966","#f5f5f5","#cc0000","#cc3333","#e6b800","#d4af37","#cdaa7d","#cd853f"],
+dark:["#003300","#006633","#2f4f4f","#dcdcdc","#800000","#660000","#b8860b","#8b7500","#8b4513","#3b2f2f"]
+},
+Peru:{
+fair:["#ff0000","#ff4d4d","#ff9999","#ffffff","#f5f5f5","#ffd700","#ffcc00","#ffeb3b","#ff8c00","#ff7f50"],
+medium:["#cc0000","#cc3333","#cc6666","#f0f0f0","#e6e6e6","#e6b800","#d4af37","#cdaa7d","#ff6600","#e67300"],
+dark:["#800000","#660000","#4d0000","#dcdcdc","#cccccc","#b8860b","#8b7500","#8b4513","#994d00","#804000"]
+},
+Brazil:{
+fair:["#009c3b","#00cc44","#33ff66","#ffdf00","#ffd700","#ffffff","#87cefa","#1e90ff","#00bfff","#98fb98"],
+medium:["#007a2f","#009c3b","#228b22","#e6c200","#d4af37","#f5f5f5","#4682b4","#4169e1","#20b2aa","#66cdaa"],
+dark:["#004d1a","#006633","#2f4f4f","#b8860b","#8b7500","#dcdcdc","#2f4f4f","#191970","#008080","#006666"]
+},
+France:{
+fair:["#0055a4","#1e90ff","#87cefa","#ffffff","#f5f5f5","#ef4135","#ff4d4d","#ff9999","#ffe4e1","#ffc0cb"],
+medium:["#003d73","#004080","#4682b4","#f0f0f0","#e6e6e6","#cc3333","#cc6666","#ff7f50","#ff6347","#e9967a"],
+dark:["#00264d","#003366","#2f4f4f","#dcdcdc","#cccccc","#800000","#660000","#4d0000","#8b4513","#5c4033"]
+},
+ Scotland:{
+fair:["#004d00","#006600","#008000","#339933","#66b266","#99cc99","#ffffff","#cccccc","#999999","#666666"],
+medium:["#003300","#004d00","#006600","#008000","#339933","#669966","#999999","#808080","#666666","#4d4d4d"],
+dark:["#002600","#003300","#004d00","#006600","#336633","#4d804d","#666666","#4d4d4d","#333333","#1a1a1a"]
+},
+China:{
+fair:["#ff0000","#ff4d4d","#ff9999","#ff66b2","#ffb3d9","#66ff66","#99ff99","#33cc33","#00cc66","#66ffb3"],
+medium:["#cc0000","#cc3333","#cc6699","#b30059","#008000","#009933","#006400","#33cc66","#00b359","#00802b"],
+dark:["#800000","#990000","#660033","#4d0026","#004d00","#003300","#002b13","#660000","#4d001a","#331a00"]
+},
+Spain:{
+fair:["#ff1a1a","#ff4d4d","#ffd700",  "#ff8c00",  "#ff1493",  "#ff69b4","#ffb347","#ffcc00","#ffa07a","#ff7f50"],
+medium:["#cc0000","#cc3300","#cc6600","#b30000","#cc0066","#e65c00","#b34700","#994d00","#cc4400","#993333"],
+dark:["#800000","#660000","#4d0000","#4d2600","#660033","#4d0026","#331100","#1a0d00","#000000"]
+},
+Greece:{
+fair:["#ffffff","#e6f0ff","#cce0ff","#99ccff","#66b3ff","#3399ff","#0073e6","#0059b3","#004080","#00264d"],
+medium:["#d9ecff","#b3d9ff","#80c1ff","#4da6ff","#1a8cff","#0073e6","#0066cc","#0059b3","#004d99","#003366"],
+dark:["#b3d9ff","#80c1ff","#4da6ff","#1a8cff","#0073e6","#0059b3","#004080","#003366","#00264d","#001a33"]
+},
+Norway:{
+fair:["#ff0000","#ff4d4d","#ff9999","#ffffff","#e6e6ff","#ccccff","#9999ff","#6666ff","#3333cc","#000099"],
+medium:["#cc0000","#cc3333","#cc6666","#ffffff","#ccccff","#9999ff","#6666cc","#333399","#000080","#000066"],
+dark:["#990000","#800000","#660000","#ffffff","#9999ff","#6666cc","#333399","#000080","#000066","#00004d"]
+},
+default:{
+fair:["#ffb6c1","#add8e6","#dda0dd","#ffd700","#87cefa","#ffc0cb","#e6e6fa","#fffacd","#ffcccb","#ffe4e1"],
+medium:["#ff7f50","#4682b4","#daa520","#8a2be2","#20b2aa","#cd853f","#6495ed","#ff6347","#40e0d0","#9370db"],
+dark:["#ffd700","#ff69b4","#00ced1","#ffa500","#adff2f","#ff4500","#00ff7f","#ff1493","#1e90ff","#32cd32"]
+}
+};
+
+let base = palette[country] || palette["default"];
+
+/* mapping skin into group */
+if(skin==="fair"||skin==="light") return base.fair;
+if(skin==="medium"||skin==="olive") return base.medium;
+return base.dark;
+
+}
+
+/* MAIN */
+function suggest(){
+
+let type=document.getElementById("type").value;
+let country=document.getElementById("country").value;
+let skin=document.getElementById("skin").value;
+let result=document.getElementById("result");
+
+if(!type||!skin){
+result.innerHTML="Select all fields";
+return;
+}
+
+let colors;
+
+if(type==="traditional"){
+if(!country){
+result.innerHTML="Select country";
+return;
+}
+colors=getColors(country,skin);
+}else{
+colors=getColors("default",skin);
+}
+
+result.innerHTML=`
+<h3>✨ Perfect Colors</h3>
+<div class="colors">
+${colors.map(c=>`<div class="color-box" style="background:${c}"></div>`).join("")}
+</div>
+`;
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>VIBGYOR AI Assistant</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(135deg,#c471ed,#f64f59);
+}
+
+.chat-container{
+width:400px;
+margin:50px auto;
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+.logo{
+    position:fixed;
+    top:20px;
+    left:20px;
+
+    width:100px;
+    height:auto;
+
+    z-index:999;
+}
+h2{
+text-align:center;
+}
+
+#chat-box{
+height:300px;
+overflow-y:auto;
+border:1px solid #ddd;
+padding:10px;
+margin-bottom:10px;
+}
+
+.user{
+text-align:right;
+color:blue;
+margin:5px;
+}
+
+.bot{
+text-align:left;
+color:green;
+margin:5px;
+}
+
+.input-box{
+display:flex;
+gap:10px;
+}
+
+input{
+flex:1;
+padding:10px;
+}
+
+button{
+padding:10px;
+background:#6a0dad;
+color:white;
+border:none;
+cursor:pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="chat-container">
+
+<h2>🤖 VIBGYOR AI Assistant</h2>
+
+<div id="chat-box"></div>
+<img src="{{ url_for('static', filename='logo.jpeg') }}" alt="VIBGYOR Logo" class="logo">
+
+<div class="input-box">
+<input type="text" id="user-input" placeholder="Ask about outfits...">
+<button onclick="sendMessage()">Send</button>
+</div>
+
+</div>
+
+<script>
+function sendMessage(){
+
+let input = document.getElementById("user-input");
+let message = input.value;
+
+if(message.trim() === "") return;
+
+let chatBox = document.getElementById("chat-box");
+
+chatBox.innerHTML += `<div class="user">${message}</div>`;
+
+fetch("/chat",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body: JSON.stringify({message:message})
+})
+.then(res => res.json())
+.then(data=>{
+chatBox.innerHTML += `<div class="bot">${data.reply}</div>`;
+chatBox.scrollTop = chatBox.scrollHeight;
+});
+
+input.value = "";
+}
+</script>
+
+</body>
+</html>
+
+

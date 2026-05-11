@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>VIBGYOR Social</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    background:
+    linear-gradient(rgba(8,8,20,0.65),rgba(8,8,20,0.75));
+    
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+    overflow-x:hidden;
+    color:white;
+}
+
+/* ANIMATED BACKGROUND EFFECT */
+body::before{
+    content:'';
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:linear-gradient(
+        135deg,
+        rgba(255,0,150,0.08),
+        rgba(0,200,255,0.08),
+        rgba(108,99,255,0.08)
+    );
+    animation:bgMove 8s infinite alternate;
+    z-index:-1;
+}
+
+@keyframes bgMove{
+    from{
+        transform:translateX(-20px);
+    }
+    to{
+        transform:translateX(20px);
+    }
+}
+
+/* HEADER */
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 40px;
+    position:relative;
+    
+}
+
+
+
+/* FOLLOW BUTTON */
+.follow-btn{
+    padding:12px 24px;
+    border:none;
+    border-radius:40px;
+    background:linear-gradient(45deg,#6c63ff,#ff4da6);
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.4s;
+    box-shadow:0 8px 20px rgba(0,0,0,0.25);
+    position: fixed;
+    top:20px;
+    right:20px;
+    z-index: 9999;
+}
+
+.follow-btn:hover{
+    transform:translateY(-3px) scale(1.05);
+    box-shadow:0 10px 25px rgba(255,77,166,0.4);
+}
+
+/* UPLOAD BOX */
+.upload-box{
+    width:65%;
+    margin-top: 120px;
+    margin:35px auto;
+    padding:28px;
+    border-radius:28px;
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,0.12);
+    box-shadow:0 12px 35px rgba(0,0,0,0.25);
+    text-align:center;
+    animation:fadeUp 1s ease;
+}
+
+/* UPLOAD LABEL */
+.upload-label{
+    display:inline-block;
+    padding:14px 28px;
+    border-radius:40px;
+    background:linear-gradient(45deg,#ff4da6,#6c63ff);
+    color:white;
+    cursor:pointer;
+    font-weight:600;
+    transition:0.4s;
+}
+
+.upload-label:hover{
+    transform:scale(1.08);
+    box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* FILE NAME */
+.file-name{
+    margin-top:12px;
+    color:#ddd;
+    font-size:13px;
+}
+
+/* INPUT */
+.upload-box input[type="text"]{
+    width:75%;
+    margin-top:18px;
+    padding:14px 18px;
+    border:none;
+    border-radius:20px;
+    outline:none;
+    background:rgba(255,255,255,0.15);
+    color:white;
+    backdrop-filter:blur(12px);
+    font-size:14px;
+}
+
+.upload-box input[type="text"]::placeholder{
+    color:#ddd;
+}
+
+/* POST BUTTON */
+.upload-box button{
+    margin-top:18px;
+    padding:12px 28px;
+    border:none;
+    border-radius:35px;
+    background:linear-gradient(45deg,#6c63ff,#ff4da6);
+    color:white;
+    cursor:pointer;
+    font-weight:600;
+    transition:0.4s;
+}
+
+.upload-box button:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(255,77,166,0.4);
+}
+
+/* FEED */
+.feed{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(420px,1fr));
+    gap:28px;
+    padding:35px;
+}
+
+/* CARD */
+.card{
+    position:relative;
+    display:flex;
+    gap:18px;
+    align-items:flex-start;
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(18px);
+    border-radius:28px;
+    padding:18px;
+    border:1px solid rgba(255,255,255,0.12);
+    box-shadow:0 12px 35px rgba(0,0,0,0.25);
+    transition:0.5s;
+    overflow:hidden;
+}
+
+.card:hover{
+    transform:translateY(-10px) scale(1.02);
+    box-shadow:0 15px 40px rgba(255,77,166,0.25);
+}
+
+/* IMAGE */
+.card img{
+    width:180px;
+    height:240px;
+    object-fit:cover;
+    border-radius:20px;
+    transition:0.5s;
+}
+
+.card:hover img{
+    transform:scale(1.05);
+}
+
+/* RIGHT SIDE */
+.right{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+}
+
+/* USER */
+.user{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    color:white;
+    font-weight:600;
+    margin-bottom:10px;
+}
+
+/* CAPTION */
+.caption{
+    margin-top:8px;
+    font-size:14px;
+    line-height:1.7;
+    color:#f1f1f1;
+}
+
+/* ACTIONS */
+.actions{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:18px;
+    font-size:22px;
+    color:white;
+}
+
+.actions span{
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.actions span:hover{
+    transform:scale(1.25);
+}
+
+/* COMMENT BOX */
+.comment-box{
+    display:flex;
+    gap:8px;
+    margin-top:18px;
+}
+
+.comment-box input{
+    flex:1;
+    padding:10px 14px;
+    border:none;
+    border-radius:15px;
+    outline:none;
+    background:rgba(255,255,255,0.12);
+    color:white;
+}
+
+.comment-box input::placeholder{
+    color:#ddd;
+}
+
+.comment-box button{
+    padding:10px 16px;
+    border:none;
+    border-radius:15px;
+    background:linear-gradient(45deg,#6c63ff,#ff4da6);
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.comment-box button:hover{
+    transform:scale(1.05);
+}
+
+/* COMMENTS */
+.comments{
+    margin-top:15px;
+    color:#f1f1f1;
+    font-size:13px;
+    line-height:1.8;
+}
+
+/* SAVED BADGE */
+.saved{
+    position:absolute;
+    top:14px;
+    right:14px;
+    background:gold;
+    color:black;
+    font-weight:600;
+    padding:6px 14px;
+    border-radius:14px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.25);
+}
+#bgVideo{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    /* IMPORTANT */
+    z-index: -2;
+}
+
+/* DARK OVERLAY */
+.overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.45);
+
+    /* ABOVE VIDEO */
+    z-index: -1;
+}
+/* ANIMATION */
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+.logo{
+    position:fixed;
+    top:15px;
+    left:20px;
+
+    width:110px;
+    height:auto;
+
+    z-index:999;
+}
+/* MOBILE */
+@media(max-width:768px){
+
+.header{
+    padding:18px;
+}
+
+.logo{
+    font-size:22px;
+}
+
+.upload-box{
+    width:90%;
+}
+
+.upload-box input[type="text"]{
+    width:100%;
+}
+
+.feed{
+    grid-template-columns:1fr;
+    padding:18px;
+}
+
+.card{
+    flex-direction:column;
+}
+
+.card img{
+    width:100%;
+    height:320px;
+}
+
+}
+</style>
+</head>
+
+<body>
+<video autoplay muted loop id="bgVideo">
+    <source src="{{ url_for('static', filename='blue gown.mp4') }}" type="video/mp4">
+</video>
+
+<div class="overlay">
+    <img src="{{ url_for('static', filename='logo.jpeg') }}" alt="VIBGYOR Logo" class="logo">
+
+</div>
+
+<div class="header">
+
+<button class="follow-btn" onclick="toggleFollow()">Follow</button>
+</div>
+
+<div class="upload-box">
+<label for="file" class="upload-label">👗 Choose Your Dress</label>
+<input type="file" id="file" hidden>
+
+<p id="fileName" class="file-name">No file chosen</p>
+<input type="text" id="caption" placeholder="Describe your vibe ">
+<br>
+<button onclick="uploadPost()">Post Outfit</button>
+</div>
+
+<div class="feed" id="feed"></div>
+
+<script>
+
+let posts=[];
+let follow=false;
+
+function toggleFollow(){
+follow=!follow;
+document.querySelector(".follow-btn").innerText=follow?"Following 💖":"Follow";
+}
+
+function uploadPost(){
+let file=document.getElementById("file").files[0];
+let caption=document.getElementById("caption").value;
+
+if(!file){ alert("Upload image"); return;}
+document.getElementById("file").addEventListener("change", function(){
+let name = this.files[0]?.name || "No file chosen";
+document.getElementById("fileName").innerText = name;
+});
+
+let reader=new FileReader();
+reader.onload=function(e){
+posts.unshift({
+img:e.target.result,
+caption:caption,
+likes:0,
+saved:false,
+comments:[]
+});
+render();
+};
+reader.readAsDataURL(file);
+}
+
+function render(){
+let feed=document.getElementById("feed");
+feed.innerHTML="";
+
+posts.forEach((p,i)=>{
+
+feed.innerHTML+=`
+<div class="card">
+
+${p.saved?'<div class="saved">⭐ Saved</div>':''}
+
+<div class="user">
+<span onclick="toggleFollow()">👥</span>
+</div>
+
+<img src="${p.img}">
+
+<div class="right">
+
+<div class="user">
+</div>
+
+<div class="caption">${p.caption}</div>
+
+<div class="actions">
+<span onclick="likePost(${i})">❤️ ${p.likes}</span>
+<span onclick="sharePost()">🔗</span>
+<span onclick="savePost(${i})">⭐</span>
+</div>
+
+<div class="comment-box">
+<input id="c${i}" placeholder="Comment...">
+<button onclick="addComment(${i})">Post</button>
+</div>
+
+<div class="comments">
+${p.comments.map(c=>`💬 ${c}`).join("<br>")}
+</div>
+
+</div>
+`;
+});
+}
+
+function likePost(i){
+posts[i].likes++;
+render();
+}
+
+function addComment(i){
+let val=document.getElementById("c"+i).value;
+if(val){
+posts[i].comments.push(val);
+render();
+}
+}
+
+function sharePost(){
+navigator.clipboard.writeText("VIBGYOR Outfit Link");
+alert("Link copied 🔗");
+}
+
+function savePost(i){
+posts[i].saved=!posts[i].saved;
+render();
+}
+
+</script>
+
+</body>
+</html>

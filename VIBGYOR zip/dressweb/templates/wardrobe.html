@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VIBGYOR Wardrobe</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    overflow-x:hidden;
+    background:#0f0f18;
+    color:white;
+}
+
+/* VIDEO BACKGROUND */
+#bgVideo{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-2;
+}
+
+/* DARK OVERLAY */
+.overlay-bg{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:
+    linear-gradient(
+        rgba(0,0,0,0.55),
+        rgba(0,0,0,0.75)
+    );
+    z-index:-1;
+}
+
+/* HEADER */
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:22px 40px;
+
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(15px);
+
+    border-bottom:1px solid rgba(255,255,255,0.08);
+
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo{
+    font-size:30px;
+    font-weight:700;
+    letter-spacing:2px;
+}
+
+.nav{
+    display:flex;
+    gap:15px;
+}
+
+.nav button{
+    padding:10px 20px;
+
+    border:none;
+    border-radius:30px;
+
+    background:rgba(255,255,255,0.1);
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:0.4s;
+}
+
+.nav button:hover{
+    background:white;
+    color:black;
+    transform:translateY(-3px);
+}
+
+/* HERO */
+.hero{
+    text-align:center;
+    padding:70px 20px 40px;
+}
+
+.hero h1{
+    font-size:55px;
+    font-weight:700;
+
+    text-shadow:0 5px 20px rgba(0,0,0,0.5);
+}
+
+.hero p{
+    margin-top:15px;
+    color:#ddd;
+    font-size:16px;
+}
+
+/* AI BOX */
+.ai-box{
+    width:85%;
+    margin:25px auto;
+
+    padding:20px;
+
+    border-radius:25px;
+
+    background:rgba(255,255,255,0.1);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,0.1);
+
+    text-align:center;
+
+    box-shadow:0 12px 35px rgba(0,0,0,0.25);
+}
+
+
+
+/* SECTION TITLE */
+.section-title{
+    width:90%;
+    margin:45px auto 20px;
+
+    font-size:30px;
+    font-weight:600;
+}
+
+/* WARDROBE GRID */
+.container{
+    width:90%;
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
+
+    gap:30px;
+    padding-top: 80px;
+    padding-bottom:60px;
+}
+
+/* CARD */
+.card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,0.1);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,0.1);
+
+    box-shadow:0 15px 40px rgba(0,0,0,0.25);
+
+    transition:0.5s;
+}
+
+.card:hover{
+    transform:translateY(-10px) scale(1.02);
+}
+
+/* IMAGE */
+.image-box{
+    height:380px;
+    overflow:hidden;
+    position:relative;
+}
+
+.image-box img{
+    width:100%;
+    height:100%;
+    object-fit:cover 50px 100px;
+
+    transition:0.6s;
+}
+
+.card:hover img{
+    transform:scale(1.08);
+}
+
+/* OVERLAY */
+.overlay{
+    position:absolute;
+    bottom:0;
+    width:100%;
+
+    padding:18px;
+
+    background:
+    linear-gradient(
+        transparent,
+        rgba(0,0,0,0.92)
+    );
+}
+
+.overlay h2{
+    font-size:22px;
+}
+
+.overlay p{
+    font-size:13px;
+    color:#ddd;
+    margin-top:4px;
+}
+
+/* CONTENT */
+.content{
+    padding:18px;
+}
+
+/* TAGS */
+.tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.tags span{
+    padding:8px 14px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,0.12);
+
+    font-size:12px;
+}
+
+/* ACTION BUTTONS */
+.actions{
+    display:flex;
+    gap:10px;
+
+    margin-top:18px;
+}
+
+.actions button{
+    flex:1;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:18px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:0.4s;
+}
+
+/* PRIMARY BUTTON */
+.primary-btn{
+    background:
+    linear-gradient(
+        45deg,
+        #6c63ff,
+        #ff4da6
+    );
+
+    color:white;
+}
+
+.primary-btn:hover{
+    transform:translateY(-3px);
+
+    box-shadow:0 10px 25px rgba(255,77,166,0.3);
+}
+
+/* SECONDARY BUTTON */
+.secondary-btn{
+    background:rgba(255,255,255,0.12);
+    color:white;
+}
+
+.secondary-btn:hover{
+    background:white;
+    color:black;
+}
+
+/* FLOATING AI BADGE */
+.ai-badge{
+    position:absolute;
+
+    top:15px;
+    right:15px;
+
+    padding:8px 14px;
+
+    border-radius:18px;
+
+    background:linear-gradient(
+        45deg,
+        #ff4da6,
+        #6c63ff
+    );
+
+    font-size:12px;
+    font-weight:600;
+
+    box-shadow:0 8px 20px rgba(0,0,0,0.25);
+}
+
+/* FOOTER */
+.footer{
+    text-align:center;
+    padding:30px;
+
+    color:#bbb;
+}
+/* UPLOAD SECTION */
+.upload-section{
+    width:90%;
+    margin:40px auto;
+    
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.upload-card{
+    flex:1;
+    min-width:250px;
+
+    background:rgba(255,255,255,0.08);
+
+    border:1px solid rgba(255,255,255,0.1);
+
+    backdrop-filter:blur(15px);
+
+    border-radius:25px;
+
+    padding:25px;
+
+    text-align:center;
+}
+
+.upload-card h2{
+    margin-bottom:20px;
+}
+
+.upload-card input{
+    display:none;
+}
+
+.upload-btn{
+    display:inline-block;
+
+    padding:12px 24px;
+
+    border-radius:30px;
+
+    background:linear-gradient(
+        45deg,
+        #6c63ff,
+        #ff4da6
+    );
+
+    color:white;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:0.4s;
+}
+
+.upload-btn:hover{
+    transform:translateY(-3px);
+}
+
+.preview-grid{
+    margin-top:20px;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(100px,1fr));
+
+    gap:12px;
+}
+
+.preview-grid img{
+    width:100%;
+    height:120px;
+
+    object-fit:cover;
+
+    border-radius:15px;
+}
+
+/* ANIMATION */
+.fade-up{
+    animation:fadeUp 1s ease;
+}
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+.hero h1{
+    font-size:38px;
+}
+
+.header{
+    padding:18px;
+    flex-direction:column;
+    gap:15px;
+}
+
+.nav{
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.image-box{
+    height:320px;
+}
+
+}
+.logo{
+    position:fixed;
+    top:15px;
+    left:20px;
+
+    width:110px;
+    height:auto;
+
+    z-index:999;
+}
+</style>
+</head>
+
+<body>
+
+<!-- VIDEO BACKGROUND -->
+<video autoplay muted loop id="bgVideo">
+    <source src="/static/gown.mp4" type="video/mp4">
+</video>
+
+<!-- OVERLAY -->
+<div class="overlay-bg"></div>
+
+<!-- HEADER -->
+<div class="header">
+<img src="{{ url_for('static', filename='logo.jpeg') }}" alt="VIBGYOR Logo" class="logo">
+
+
+
+<div class="nav">
+
+<a href="/">
+<button>Home</button>
+</a>
+
+<a href="/wardrobe">
+<button>Wardrobe</button>
+</a>
+
+<a href="/social">
+<button>Social</button>
+</a>
+
+<a href="/history">
+<button>History</button>
+</a>
+
+</div>
+
+</div>
+
+<!-- HERO -->
+<div class="hero fade-up">
+
+<h1>AI Smart Wardrobe</h1>
+
+<p>
+Luxury AI fashion experience personalized for your vibe.
+</p>
+
+</div>
+
+<!-- AI INSIGHT -->
+<div class="ai-box fade-up">
+
+💡 AI Suggestion:
+Black fusion outfits are trending for tonight's vibe.
+
+</div>
+
+
+<!-- UPLOAD SECTION -->
+<div class="upload-section fade-up">
+
+    <!-- TOPS -->
+    <div class="upload-card">
+
+        <h2>👕 Tops</h2>
+
+        <label class="upload-btn">
+            Choose Top
+            <input type="file" accept="image/*" multiple onchange="previewImages(event,'topsPreview')">
+        </label>
+
+        <div id="topsPreview" class="preview-grid"></div>
+
+    </div>
+
+    <!-- BOTTOMS -->
+    <div class="upload-card">
+
+        <h2>👖 Bottoms</h2>
+
+        <label class="upload-btn">
+            Choose Bottom
+            <input type="file" accept="image/*" multiple onchange="previewImages(event,'bottomsPreview')">
+        </label>
+
+        <div id="bottomsPreview" class="preview-grid"></div>
+
+    </div>
+
+    <!-- TRADITIONAL -->
+    <div class="upload-card">
+
+        <h2>👗 Traditional</h2>
+
+        <label class="upload-btn">
+            Choose Traditional
+            <input type="file" accept="image/*" multiple onchange="previewImages(event,'traditionalPreview')">
+        </label>
+
+        <div id="traditionalPreview" class="preview-grid"></div>
+
+    </div>
+
+</div>
+
+<!-- TITLE -->
+<div class="section-title">
+🔥 Recommended Looks
+</div>
+
+<!-- WARDROBE -->
+<div class="container">
+
+<!-- CARD -->
+<div class="card fade-up">
+
+<div class="ai-badge">
+AI PICK
+</div>
+
+<div class="image-box">
+
+<img src="{{ url_for('static',filename = 'trendm 5.jpg' ) }}">
+
+<div class="overlay">
+<h2>Elegant Night</h2>
+<p>Fusion • Black • Party</p>
+</div>
+
+</div>
+
+<div class="content">
+
+<div class="tags">
+<span>Luxury</span>
+<span>Trending</span>
+<span>Modern</span>
+</div>
+
+<div class="actions">
+<button class="primary-btn">
+✨ Try Look
+</button>
+
+<button class="secondary-btn">
+❤️ Save
+</button>
+</div>
+
+</div>
+
+</div>
+
+<!-- CARD -->
+<div class="card fade-up">
+
+<div class="image-box">
+
+<img src="{{ url_for('static',filename = 'trend 6.jpg' ) }}">
+
+<div class="overlay">
+<h2>Royal Style</h2>
+<p>Traditional • Wedding</p>
+</div>
+
+</div>
+
+<div class="content">
+
+<div class="tags">
+<span>Ethnic</span>
+<span>Elegant</span>
+<span>Premium</span>
+</div>
+
+<div class="actions">
+<button class="primary-btn">
+✨ Try Look
+</button>
+
+<button class="secondary-btn">
+❤️ Save
+</button>
+</div>
+
+</div>
+
+</div>
+
+<!-- CARD -->
+<div class="card fade-up">
+
+<div class="ai-badge">
+HOT
+</div>
+
+<div class="image-box">
+
+<img src="{{ url_for('static',filename = 'recom 3.jpg' ) }}">
+
+<div class="overlay">
+<h2>Street Glow</h2>
+<p>Western • Casual</p>
+</div>
+
+</div>
+
+<div class="content">
+
+<div class="tags">
+<span>Streetwear</span>
+<span>Cool</span>
+<span>Urban</span>
+</div>
+
+<div class="actions">
+<button class="primary-btn">
+✨ Try Look
+</button>
+
+<button class="secondary-btn">
+❤️ Save
+</button>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+© 2026 VIBGYOR • Smart Fashion Experience
+</div>
+<script>
+
+let wardrobeData =
+JSON.parse(localStorage.getItem("wardrobeData")) || [];
+
+function previewImages(event, previewId){
+
+    const preview =
+    document.getElementById(previewId);
+
+    const files = event.target.files;
+
+    for(let i=0; i<files.length; i++){
+
+        const reader = new FileReader();
+
+        reader.onload = function(e){
+
+            const imageData = e.target.result;
+
+            /* SHOW IMAGE */
+
+            const img =
+            document.createElement("img");
+
+            img.src = imageData;
+
+            preview.appendChild(img);
+
+            /* CATEGORY */
+
+            let category = "";
+
+            if(previewId == "topsPreview"){
+                category = "Top";
+            }
+
+            else if(previewId == "bottomsPreview"){
+                category = "Bottom";
+            }
+
+            else if(previewId == "traditionalPreview"){
+                category = "Traditional";
+            }
+
+            /* SAVE TO WARDROBE */
+
+            wardrobeData.push({
+
+                image:imageData,
+
+                category:category
+
+            });
+
+            localStorage.setItem(
+                "wardrobeData",
+                JSON.stringify(wardrobeData)
+            );
+
+            /* SAVE TO HISTORY */
+
+            let history =
+            JSON.parse(
+                localStorage.getItem("outfitHistory")
+            ) || [];
+
+            history.push({
+
+                image:imageData,
+
+                category:category,
+
+                occasion:"Fashion",
+
+                color:"Black",
+
+                mood:"Elegant",
+
+                fav:false,
+
+                rating:0
+
+            });
+
+            localStorage.setItem(
+                "outfitHistory",
+                JSON.stringify(history)
+            );
+
+        }
+
+        reader.readAsDataURL(files[i]);
+    }
+}
+function getRecommendation(){
+
+    const occasion =
+    document.querySelectorAll("select")[0].value;
+
+    const style =
+    document.querySelectorAll("select")[1].value;
+
+    const color =
+    document.querySelectorAll("select")[2].value;
+
+    let recommended =
+    wardrobeData.filter(item=>{
+
+        /* STYLE FILTER */
+
+        if(style === "Traditional" &&
+           item.category !== "Traditional"){
+            return false;
+        }
+
+        if(style === "Western" &&
+           item.category !== "Western"){
+            return false;
+        }
+
+        return true;
+    });
+
+    /* RANDOM PICK */
+
+    recommended =
+    recommended.sort(() => 0.5 - Math.random());
+
+    let html = "";
+
+    recommended.forEach(item=>{
+
+        html += `
+
+        <div class="card fade-up">
+
+            <div class="image-box">
+
+                <img src="${item.image}">
+
+                <div class="overlay">
+                    <h2>${style || item.category}</h2>
+
+                    <p>
+                    ${occasion || 'Fashion'}
+                    •
+                    ${color || 'Stylish'}
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="content">
+
+                <div class="tags">
+                    <span>${style || item.category}</span>
+                    <span>${occasion || 'Fashion'}</span>
+                    <span>${color || 'Elegant'}</span>
+                </div>
+
+                <div class="actions">
+
+                    <button class="primary-btn"
+                    onclick="saveRecommendation(
+                    '${item.image}',
+                    '${style}',
+                    '${occasion}',
+                    '${color}'
+                    )">
+
+                    ❤️ Save
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        `;
+    });
+
+    document.getElementById(
+        "recommendedContainer"
+    ).innerHTML = html;
+
+    document.querySelector(".ai-box").innerHTML =
+    `
+    💡 AI selected
+    ${recommended.length}
+    outfit recommendations for
+    ${occasion || 'your vibe'} ✨
+    `;
+}
+function saveRecommendation(
+    image,
+    style,
+    occasion,
+    color
+){
+
+    let history =
+    JSON.parse(
+        localStorage.getItem("outfitHistory")
+    ) || [];
+
+    history.push({
+
+        image:image,
+
+        category:style || "Fashion",
+
+        occasion:occasion || "Casual",
+
+        color:color || "Black",
+
+        mood:"Elegant",
+
+        fav:false,
+
+        rating:0
+
+    });
+
+    localStorage.setItem(
+        "outfitHistory",
+        JSON.stringify(history)
+    );
+
+    alert("✨ Recommendation saved to history");
+}
+</script>
+
+</body>
+</html>

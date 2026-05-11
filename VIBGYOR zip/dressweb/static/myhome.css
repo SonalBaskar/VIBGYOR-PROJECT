@@ -1,0 +1,131 @@
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #5f5fff, #6ec6ff);
+    color: white;
+}
+
+/* HEADER */
+.header {
+    padding: 20px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* TITLE */
+.title {
+    text-align: center;
+    margin: 40px;
+    font-size: 20px;
+    background: white;
+    color: black;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+/* GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 50px;
+}
+
+/* BOX */
+.box {
+    background: rgba(255,255,255,0.2);
+    height: 100px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.box:hover {
+    background: white;
+    color: black;
+    transform: scale(1.05);
+}
+
+/* SECTION */
+.section {
+    margin: 30px 20px;
+}
+
+/* SCROLL */
+.scroll-container {
+    display: flex;
+    overflow: hidden;
+    gap: 20px;
+}
+
+.scroll {
+    display: flex;
+    gap: 20px;
+    animation: scroll 60s linear infinite;
+}
+
+.scroll img {
+    width: 300px;
+    height: 300px;
+    border-radius: 15px;
+}
+
+/* ANIMATION */
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* FOOTER */
+.footer {
+    padding: 20px;
+    font-size: 14px;
+}
+/* VIDEO BACKGROUND */
+#bgVideo {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+    z-index: -2;
+}
+
+/* OVERLAY (for readability) */
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(10,0,30,0.6), rgba(0,40,70,0.6));
+    z-index: -1;
+}
+.contact {
+    text-align: center;
+    padding: 50px 20px;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+    margin-top: 60px;
+}
+
+.contact h2 {
+    margin-bottom: 20px;
+}
+
+.contact p {
+    margin: 10px 0;
+}
+.logo{
+    position:fixed;
+    top:15px;
+    left:20px;
+    width:110px;
+    height:auto;
+
+    z-index:999;
+}

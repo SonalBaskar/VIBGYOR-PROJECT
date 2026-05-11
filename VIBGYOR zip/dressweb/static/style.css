@@ -1,0 +1,383 @@
+body{
+margin:0;
+font-family:Arial;
+background: linear-gradient(135deg,#c471ed,#f64f59);
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+.main-container{
+display:flex;
+background:#f2eff5;
+width:800px;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+.image-section{
+flex:1;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#e9dff5;
+}
+.image-section img{
+width:250px;
+
+}
+.login-section{
+flex:1;
+padding:40px;
+}
+.login-section h2{
+margin-bottom:5px;
+}
+.login-section p{
+color:rgb(245, 243, 246);
+font-size:14px;
+}
+input{
+width:100%;
+padding:12px;
+margin-top:15px;
+border:none;
+border-radius:8px;
+background:#e7d7ef;
+}
+button{
+width:100%;
+padding:12px;
+margin-top:20px;
+background:#5b0060;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:15px;
+}
+button:hover{
+background:#7b0085;
+}
+.forgot span{
+font-size:12px;
+margin-top:10px;
+color:#6a0dad;
+cursor:pointer;
+}
+.divider{
+text-align:center;
+margin-top:20px;
+font-size:12px;
+color:gray;
+}
+.google-btn{
+background: linear-gradient(135deg, #f16fe4, #667eea);
+color:rgb(252, 248, 248);
+
+margin-top:10px;
+}
+.register{
+margin-top:20px;
+font-size:13px;
+}
+.register span{
+color:#6a0dad;
+cursor:pointer;
+}
+/* Dashboard Page */
+.dashboard-container{
+text-align:center;
+padding:40px;
+}
+.dashboard-container h1{
+color:#5b0060;
+}
+.dashboard-options{
+display:grid;
+grid-template-columns:repeat(2, 250px);
+gap:30px;
+justify-content:center;
+margin-top:40px;
+}
+.card{
+background:rgb(245, 244, 246);
+padding:25px;
+border-radius:12px;
+text-decoration:none;
+color:black;
+box-shadow:0px 5px 15px rgba(0,0,0,0.2);
+transition:0.3s;
+}
+.card:hover{
+transform:scale(1.05);
+background:#f2f1f3;
+}
+.card h3{
+color:#6a0dad;
+}
+.outfit-container{
+width:400px;
+margin:auto;
+margin-top:80px;
+padding:30px;
+background:rgb(247, 246, 247);
+border-radius:10px;
+box-shadow:0px 0px 10px gray;
+text-align:center;
+}
+select{
+width:100%;
+padding:10px;
+margin:10px 0;
+}
+button{
+padding:10px 20px;
+background:#6a0dad;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+button:hover{
+background:#4b0082;
+}
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.main-container {
+    display: flex;
+    height: 70vh;
+}
+
+/* LEFT IMAGE */
+.image-section {
+    flex: 1;
+}
+
+.image-section img {
+    width: 80%;
+    height: 80%;
+    object-fit: cover;
+    color: #885be1;
+}
+
+/* RIGHT LOGIN */
+.login-section {
+    flex: 1;
+    background: rgb(186, 125, 233);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-section h2 {
+    margin-bottom: 30px;
+}
+
+.login-section p {
+    margin-bottom: 20px;
+    color: rgb(8, 8, 8);
+}
+.divider
+{
+    color: #0c0c0c;
+}
+
+/* INPUTS */
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #0c0c0c;
+}
+
+/* BUTTON */
+button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg, #ff6ec4, #7873f5);
+    border: none;
+    color: white;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* LINK TEXT */
+.register {
+    margin-top: 15px;
+}
+
+.register a {
+    color: blue;
+    text-decoration: none;
+    font-weight: bold;
+}
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-box {
+    background: white;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.account {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.account:hover {
+    background: #eee;
+}
+.popup {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+/* MAIN CONTAINER */
+.popup-box {
+    display: flex;
+    width: 650px;
+    height: 350px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* LEFT SIDE (LOGO ONLY) */
+.left-panel {
+    width: 40%;
+    background: #f1f3f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.google-big {
+    width: 120px;
+}
+
+/* RIGHT SIDE (CONTENT) */
+.right-panel {
+    width: 60%;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.right-panel h2 {
+    margin-bottom: 5px;
+}
+
+.choose-text {
+    color: gray;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+/* ACCOUNT STYLE */
+.account {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.account:hover {
+    background: #f1f3f4;
+}
+
+.profile {
+    width: 35px;
+    border-radius: 50%;
+}
+
+.email {
+    font-weight: 500;
+}
+
+.name {
+    font-size: 12px;
+    color: gray;
+}
+
+/* LINE SEPARATOR */
+hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 5px 0;
+}
+.popup-box {
+    animation: popIn 0.3s ease;
+}
+
+@keyframes popIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+.popup-header {
+    display: flex;
+    justify-content: flex-end;
+}
+.back-btn:hover {
+    background: #f1f3f4;
+}
+/* VIDEO BACKGROUND */
+#bgVideo {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+    z-index: -2;
+}
+
+/* OVERLAY (for readability) */
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(10,0,30,0.6), rgba(0,40,70,0.6));
+    z-index: -1;
+}
+.logo{
+    position:fixed;
+    top:15px;
+    left:20px;
+    padding : 40px;
+    width:110px;
+    height:auto;
+    z-index:999;
+}

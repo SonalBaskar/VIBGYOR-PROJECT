@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIBGYOR Fashion History</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    overflow-x:hidden;
+    background:#111;
+    color:white;
+}
+
+/* VIDEO BACKGROUND */
+#bgVideo{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-2;
+}
+
+/* OVERLAY */
+.overlay-bg{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.65));
+    z-index:-1;
+}
+
+/* HEADER */
+.header{
+    padding:30px 20px;
+    text-align:center;
+}
+
+.header h1{
+    font-size:42px;
+    font-weight:700;
+    letter-spacing:2px;
+    text-shadow:0 5px 20px rgba(0,0,0,0.4);
+}
+
+.header p{
+    margin-top:10px;
+    color:#ddd;
+    font-size:15px;
+}
+
+/* AI INSIGHTS */
+.ai-box{
+    width:88%;
+    margin:20px auto;
+    padding:18px;
+    border-radius:22px;
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,0.15);
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,0.25);
+}
+
+/* STATS */
+.stats{
+    width:90%;
+    margin:20px auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.stat-card{
+    padding:20px;
+    border-radius:24px;
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(15px);
+    text-align:center;
+    border:1px solid rgba(255,255,255,0.12);
+    transition:0.4s;
+}
+
+.stat-card:hover{
+    transform:translateY(-5px);
+    background:rgba(255,255,255,0.18);
+}
+
+.stat-card h2{
+    font-size:30px;
+    margin-bottom:5px;
+}
+
+.stat-card p{
+    color:#ddd;
+    font-size:14px;
+}
+
+/* SECTION TITLE */
+.section-title{
+    width:90%;
+    margin:35px auto 10px;
+    font-size:28px;
+    font-weight:600;
+}
+
+/* GRID */
+.container{
+    width:90%;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
+    gap:28px;
+    padding-bottom:50px;
+}
+
+/* CARD */
+.card{
+    border-radius:28px;
+    overflow:hidden;
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,0.12);
+    box-shadow:0 12px 30px rgba(0,0,0,0.25);
+    transition:0.5s;
+}
+
+.card:hover{
+    transform:translateY(-10px) scale(1.02);
+}
+
+/* IMAGE */
+.image-box{
+    position:relative;
+    height:350px;
+    overflow:hidden;
+}
+
+.image-box img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:0.5s;
+}
+
+.card:hover img{
+    transform:scale(1.08);
+}
+
+/* OVERLAY */
+.overlay{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    padding:15px;
+    background:linear-gradient(transparent,rgba(0,0,0,0.9));
+}
+
+.overlay h3{
+    font-size:18px;
+}
+
+.overlay p{
+    font-size:13px;
+    color:#ddd;
+}
+
+/* CONTENT */
+.content{
+    padding:18px;
+}
+
+.info-row{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:12px;
+    font-size:14px;
+}
+
+/* STARS */
+.stars{
+    margin:10px 0;
+}
+
+.star{
+    font-size:22px;
+    color:#888;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.star.active{
+    color:gold;
+}
+
+.star:hover{
+    transform:scale(1.2);
+}
+
+/* ACTIONS */
+.actions{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    margin-top:15px;
+}
+
+.actions button{
+    flex:1;
+    border:none;
+    padding:10px;
+    border-radius:18px;
+    cursor:pointer;
+    font-weight:600;
+    background:rgba(255,255,255,0.18);
+    color:white;
+    transition:0.3s;
+}
+
+.actions button:hover{
+    background:white;
+    color:black;
+    transform:translateY(-3px);
+}
+
+/* FAVORITE SECTION */
+.favorite-section{
+    width:90%;
+    margin:auto;
+}
+
+/* EMPTY */
+.empty{
+    text-align:center;
+    margin-top:80px;
+    font-size:24px;
+    color:#eee;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+
+.header h1{
+    font-size:30px;
+}
+
+.filters select{
+    width:100%;
+}
+
+.container{
+    grid-template-columns:1fr;
+}
+
+.image-box{
+    height:300px;
+}
+
+}
+.logo{
+    position:fixed;
+    top:15px;
+    left:20px;
+
+    width:110px;
+    height:auto;
+
+    z-index:999;
+}
+</style>
+</head>
+
+<body>
+
+<!-- VIDEO BACKGROUND -->
+<video autoplay muted loop id="bgVideo">
+    <source src="{{ url_for('static', filename='blue gown.mp4') }}" type="video/mp4">
+</video>
+
+<div class="overlay-bg"></div>
+<img src="{{ url_for('static', filename='logo.jpeg') }}" alt="VIBGYOR Logo" class="logo">
+
+<!-- HEADER -->
+<div class="header">
+    <h1> VIBGYOR Fashion History</h1>
+    <p>Your personal fashion diary & smart wardrobe assistant</p>
+</div>
+
+
+
+<!-- AI BOX -->
+<div class="ai-box" id="aiBox">
+💡 Your smart fashion insights will appear here.
+</div>
+
+<!-- STATS -->
+<div class="stats">
+
+<div class="stat-card">
+<h2 id="totalLooks">0</h2>
+<p>Total Looks</p>
+</div>
+
+<div class="stat-card">
+<h2 id="favorites">0</h2>
+<p>Favorite Outfits</p>
+</div>
+
+<div class="stat-card">
+<h2>🔥</h2>
+<p>Fashion Streak Active</p>
+</div>
+
+</div>
+
+<!-- FAVORITES -->
+<div class="section-title">❤️ Favorite Looks</div>
+<div class="container favorite-section" id="favoriteContainer"></div>
+
+<!-- MAIN HISTORY -->
+<div class="section-title">🧥 Outfit History</div>
+<div class="container" id="history"></div>
+
+<script>
+
+let data = JSON.parse(localStorage.getItem("outfitHistory")) || [];
+
+/* RENDER */
+function render(list){
+
+let container = document.getElementById("history");
+let favContainer = document.getElementById("favoriteContainer");
+
+container.innerHTML="";
+favContainer.innerHTML="";
+
+if(list.length === 0){
+    container.innerHTML = "<div class='empty'>Start your fashion journey </div>";
+    return;
+}
+
+list.forEach((item,i)=>{
+
+let image = item.dress || item.top || item.bottom || item.image || "https://via.placeholder.com/400";
+
+let card = document.createElement("div");
+card.className = "card";
+
+card.innerHTML = `
+
+<div class="image-box">
+<img src="${image}">
+
+<div class="overlay">
+<h3>${item.occasion || 'Fashion'} Look ✨</h3>
+<p>${item.category || 'Fusion'} • ${item.color || 'Black'}</p>
+</div>
+</div>
+
+<div class="content">
+
+<div class="info-row">
+<span>🎨 ${item.color || 'Black'}</span>
+<span>😊 ${item.mood || 'Elegant'}</span>
+</div>
+
+<div class="stars">
+${[1,2,3,4,5].map(n=>`
+<span class="star ${item.rating>=n?'active':''}" onclick="rate(${i},${n})">★</span>
+`).join("")}
+</div>
+
+<div class="actions">
+<button onclick="toggleFav(${i})">${item.fav?'❤️':'🤍'}</button>
+<button onclick="wearAgain(${i})">🔁</button>
+<button onclick="del(${i})">🗑</button>
+</div>
+
+</div>
+
+`;
+
+container.appendChild(card);
+
+if(item.fav){
+    favContainer.appendChild(card.cloneNode(true));
+}
+
+});
+
+updateStats(list);
+generateAI(list);
+
+}
+
+/* FAVORITE */
+function toggleFav(i){
+    data[i].fav = !data[i].fav;
+    save();
+}
+
+/* DELETE */
+function del(i){
+    data.splice(i,1);
+    save();
+}
+
+/* RATING */
+function rate(i,val){
+    data[i].rating = val;
+    save();
+}
+
+/* WEAR AGAIN */
+function wearAgain(i){
+    alert("✨ Outfit added to today's inspiration!");
+}
+
+/* SAVE */
+function save(){
+    localStorage.setItem("outfitHistory", JSON.stringify(data));
+    filter();
+}
+
+/* FILTER */
+function filter(){
+
+let o = occasion.value;
+let c = color.value;
+let m = mood.value;
+
+let filtered = data.filter(x=>
+(!o || x.occasion==o) &&
+(!c || x.color==c) &&
+(!m || x.mood==m)
+);
+
+render(filtered);
+
+}
+
+/* AI INSIGHTS */
+function generateAI(list){
+
+let box = document.getElementById("aiBox");
+
+if(list.length==0){
+box.innerHTML = "💡 Add outfits to unlock fashion insights!";
+return;
+}
+
+let favCount = list.filter(x=>x.fav).length;
+
+if(favCount >= 3){
+    box.innerHTML = "💡 You love your signature styles! Your fashion identity is becoming strong ✨";
+}
+else if(list.length >= 5){
+    box.innerHTML = "💡 You're experimenting with different looks beautifully 🌈";
+}
+else{
+    box.innerHTML = "💡 Keep building your wardrobe history for smarter recommendations 👗";
+}
+
+}
+
+/* STATS */
+function updateStats(list){
+
+let total = list.length;
+let fav = list.filter(x=>x.fav).length;
+
+let colors = {};
+
+list.forEach(item=>{
+    let c = item.color || 'Black';
+    colors[c] = (colors[c] || 0) + 1;
+});
+
+let top = Object.keys(colors).reduce((a,b)=>colors[a]>colors[b]?a:b, Object.keys(colors)[0] || 'Black');
+
+
+document.getElementById("totalLooks").innerText = total;
+document.getElementById("favorites").innerText = fav;
+document.getElementById("topColor").innerText = top;
+
+}
+
+/* EVENTS */
+occasion.onchange = filter;
+color.onchange = filter;
+mood.onchange = filter;
+
+render(data);
+
+</script>
+
+</body>
+</html>

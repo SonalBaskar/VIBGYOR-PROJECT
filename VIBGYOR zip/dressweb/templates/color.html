@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Color Styling</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    overflow-x: hidden;
+    background: none;   /* ❗ IMPORTANT: remove gradient */
+}
+
+@keyframes bgMove {
+    0% { background-position: left; }
+    100% { background-position: right; }
+}
+
+.header {
+    text-align: center;
+    padding: 20px;
+}
+
+.title {
+    font-size: 28px;
+    background: white;
+    color: black;
+    padding: 10px 30px;
+    border-radius: 20px;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+}
+
+.option-box {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    margin: 15px 0;
+    margin-top: 60px;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.2);
+    cursor: pointer;
+}
+
+.dropdown {
+    display: none;
+    padding: 10px;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.2);
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    margin: 5px 0;
+    background: rgba(255,255,255,0.3);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.preview {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.palette {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.color-box {
+    width: 65px;
+    height: 65px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.result {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.outfit div {
+    width: 100px;
+    height: 130px;
+    display: inline-block;
+    margin: 10px;
+    border-radius: 12px;
+}
+.video-container {
+    text-align: center;
+    margin-top: 40px;
+}
+#bgVideo {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+
+/* OVERLAY */
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(10,0,30,0.7), rgba(0,40,70,0.7));
+    z-index: -1;
+    pointer-events: none;
+}
+.container, .header {
+    position: relative;
+    z-index: 1;
+}
+.logo{
+    position:fixed;
+    top:15px;
+    left:20px;
+
+    width:110px;
+    height:auto;
+
+    z-index:999;
+}
+</style>
+</head>
+
+<body>
+    <!-- VIDEO -->
+<video autoplay muted loop id="bgVideo">
+    <source src="/static/gown.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<img src="{{ url_for('static', filename='logo.jpeg') }}" alt="VIBGYOR Logo" class="logo">
+
+<div class="header">
+    <div class="title">Color based Recommendation</div>
+</div>
+       
+<div class="container">
+
+<!-- SKIN -->
+<div class="option-box" onclick="toggle('skinDrop')">
+    <span id="skinText">Select Skin Tone</span>
+    <span>▼</span>
+</div>
+
+<div id="skinDrop" class="dropdown">
+<div class="item" onclick="selectSkin('Fair')"><div class="preview" style="background:#ffe0bd"></div> Fair</div>
+<div class="item" onclick="selectSkin('Light')"><div class="preview" style="background:#f1c27d"></div> Light</div>
+<div class="item" onclick="selectSkin('Medium')"><div class="preview" style="background:#e0ac69"></div> Medium</div>
+<div class="item" onclick="selectSkin('Olive')"><div class="preview" style="background:#c68642"></div> Olive</div>
+<div class="item" onclick="selectSkin('Brown')"><div class="preview" style="background:#8d5524"></div> Brown</div>
+<div class="item" onclick="selectSkin('Dark')"><div class="preview" style="background:#5d3a1a"></div> Dark</div>
+</div>
+
+<!-- DRESS TYPE -->
+<div class="option-box" onclick="toggle('dressDrop')">
+    <span id="dressText">Select Dress Type</span>
+    <span>▼</span>
+</div>
+
+<div id="dressDrop" class="dropdown">
+<div class="item" onclick="selectDress('Western')">Western</div>
+<div class="item" onclick="selectDress('Traditional')">Traditional</div>
+<div class="item" onclick="selectDress('Formal')">Formal</div>
+<div class="item" onclick="selectDress('Ethnic')">Ethnic</div>
+<div class="item" onclick="selectDress('Vintage')">Vintage</div>
+<div class="item" onclick="selectDress('Party Wear')">Party Wear</div>
+<div class="item" onclick="selectDress('Luxury')">Luxury</div>
+<div class="item" onclick="selectDress('Minimalist')">Minimalist</div>
+<div class="item" onclick="selectDress('Travel Wear')">Travel Wear</div>
+<div class="item" onclick="selectDress('Indo-Western')">Indo-Western</div>
+<div class="item" onclick="selectDress('Over-Sized')">Over-Sized</div>
+</div>
+
+<!-- OCCASION -->
+<div class="option-box" onclick="toggle('occasionDrop')">
+    <span id="occasionText">Select Occasion</span>
+    <span>▼</span>
+</div>
+
+<div id="occasionDrop" class="dropdown">
+<div class="item" onclick="selectOccasion('Casual')">Casual</div>
+<div class="item" onclick="selectOccasion('Party')">Party</div>
+<div class="item" onclick="selectOccasion('Wedding')">Wedding</div>
+<div class="item" onclick="selectOccasion('Office')">Office</div>
+<div class="item" onclick="selectOccasion('Date')">Date</div>
+<div class="item" onclick="selectOccasion('Birthday')">Birthday</div>
+<div class="item" onclick="selectOccasion('Farewell')">Farewell</div>
+<div class="item" onclick="selectOccasion('Valentine Day')">Valentine Day</div>
+<div class="item" onclick="selectOccasion('Get together')">Get together</div>
+<div class="item" onclick="selectOccasion('Concert')">Concert</div>
+<div class="item" onclick="selectOccasion('Vacation')">Vacation</div>
+<div class="item" onclick="selectOccasion('Interview')">Interview</div>
+</div>
+
+<!-- COLOR OPTIONAL -->
+<div class="option-box" onclick="toggle('colorDrop')">
+    <span id="colorText">Select Color</span>
+    <span>▼</span>
+</div>
+
+<div id="colorDrop" class="dropdown">
+<div class="item" onclick="showShades('red')"><div class="preview" style="background:#ff0000"></div> Red</div> 
+<div class="item" onclick="showShades('pink')"><div class="preview" style="background:#ff1493"></div> Pink</div>
+ <div class="item" onclick="showShades('blue')"><div class="preview" style="background:#0000ff"></div> Blue</div> 
+ <div class="item" onclick="showShades('green')"><div class="preview" style="background:#00cc00"></div> Green</div>
+  <div class="item" onclick="showShades('yellow')"><div class="preview" style="background:#ffff00"></div> Yellow</div> 
+  <div class="item" onclick="showShades('orange')"><div class="preview" style="background:#ff8c00"></div> Orange</div>
+   <div class="item" onclick="showShades('purple')"><div class="preview" style="background:#800080"></div> Purple</div>
+    <div class="item" onclick="showShades('brown')"><div class="preview" style="background:#8b4513"></div> Brown</div> 
+    <div class="item" onclick="showShades('grey')"><div class="preview" style="background:#808080"></div> Grey</div> 
+    <div class="item" onclick="showShades('black')"><div class="preview" style="background:#000"></div> Black</div>
+     <div class="item" onclick="showShades('white')"><div class="preview" style="background:#fff;border:1px solid #000"></div> White</div>
+</div>
+
+<!-- SHADES -->
+<div id="palette" class="palette"></div>
+
+<!-- RESULT -->
+<div id="result" class="result"></div>
+
+</div>
+
+<script>
+
+let selectedSkin = "";
+let selectedDress = "";
+let selectedOccasion = "";
+
+function toggle(id){
+    let el = document.getElementById(id);
+    el.style.display = el.style.display === "block" ? "none" : "block";
+}
+
+/* SELECT FUNCTIONS */
+function selectSkin(skin){
+    selectedSkin = skin;
+    document.getElementById("skinText").innerText = "Skin Tone: " + skin;
+    document.getElementById("skinDrop").style.display = "none";
+    tryGenerate();
+}
+
+function selectDress(type){
+    selectedDress = type;
+    document.getElementById("dressText").innerText = "Dress: " + type;
+    document.getElementById("dressDrop").style.display = "none";
+    tryGenerate();
+}
+
+function selectOccasion(type){
+    selectedOccasion = type;
+    document.getElementById("occasionText").innerText = "Occasion: " + type;
+    document.getElementById("occasionDrop").style.display = "none";
+    tryGenerate();
+}
+
+/* MAIN GENERATOR */
+function tryGenerate(){
+    if(selectedSkin && selectedDress && selectedOccasion){
+        let outfits = generateSmartOutfits(selectedSkin, selectedDress, selectedOccasion);
+
+        let html = `<h2>✨ Perfect Outfit for You</h2>`;
+
+        outfits.forEach(pair => {
+            html += `
+            <div class="outfit">
+                <div style="background:${pair[0]}"></div>
+                <div style="background:${pair[1]}"></div>
+            </div>`;
+        });
+
+        document.getElementById("result").innerHTML = html;
+    }
+}
+
+/* LOGIC */
+function generateSmartOutfits(skin, dress, occasion){
+
+    let baseColors = {
+        Fair: ["#ffb6c1","#add8e6","#dda0dd","#ffd700"],
+        Light: ["#ffa07a","#87cefa","#ff69b4","#20b2aa"],
+        Medium: ["#ff7f50","#4682b4","#daa520","#8a2be2"],
+        Olive: ["#556b2f","#ff8c00","#6a5acd","#2e8b57"],
+        Brown: ["#ff6347","#4682b4","#ffd700","#8b008b"],
+        Dark: ["#ffd700","#ff69b4","#00ced1","#ffa500"]
+    };
+
+    let occasionColors = {
+        Casual: ["#ffffff","#cccccc","#999999"],
+        Party: ["#000000","#ff4081","#800080"],
+        Wedding: ["#ffd700","#ff0000","#ff69b4"],
+        Office: ["#2f4f4f","#4682b4","#708090"],
+        Festive: ["#ff8c00","#ff1493","#32cd32"]
+    };
+
+    let results = [];
+
+    for(let i=0;i<5;i++){
+        let top = baseColors[skin][Math.floor(Math.random()*baseColors[skin].length)];
+        let bottom = occasionColors[occasion][Math.floor(Math.random()*occasionColors[occasion].length)];
+        results.push([top, bottom]);
+    }
+
+    return results;
+}
+
+/* SHADES */
+const shades = {
+red:["#FFE5E5","#FFCCCC","#FFB3B3","#FF9999","#FF8080","#FF6666","#FF4D4D","#FF3333","#FF1A1A","#FF0000" ,"#E60000","#CC0000","#B30000","#990000","#800000","#660000","#4D0000","#330000"], 
+pink:["#FFE6F0", "#FFCCE0","#FFB3D1","#FF99C2","#FF80B3","#FF66A3","#FF4D94","#FF3385","#FF1A75","#FF0066","#E6005C","#CC0052","#B30047","#99003D","#800033","#660029","#4D001F","#330014"],
+ blue:["#E6F0FF","#CCE0FF","#B3D1FF","#99C2FF","#80B3FF","#66A3FF","#4D94FF","#3385FF","#1A75FF","#0066FF","#005CE6","#0052CC","#0047B3","#003D99","#003380","#002966","#001F4D","#001433"],
+  green:["#E6FFE6","#CCFFCC","#B3FFB3","#99FF99","#80FF80","#66FF66","#4DFF4D","#33FF33","#1AFF1A","#00FF00","#00E600","#00CC00","#00B300","#009900","#008000","#006600","#004D00","#003300"], 
+  yellow:["#FFFFE6","#FFFFCC","#FFFFB3","#FFFF99","#FFFF80","#FFFF66","#FFFF4D","#FFFF33","#FFFF1A","#FFFF00","#E6E600","#CCCC00","#B3B300","#999900","#808000","#666600","#4D4D00","#333300"],
+   orange:["#FFF2E6","#FFE6CC","#FFD9B3","#FFCC99","#FFBF80","#FFB366","#FFA64D","#FF9933","#FF8C1A","#FF8000","#E67300","#CC6600","#B35900","#994D00","#804000","#663300","#4D2600","#331A00"],
+    purple:["#F2E6FF","#E6CCFF","#D9B3FF","#CC99FF","#BF80FF","#B366FF","#A64DFF","#9933FF","#8C1AFF","#8000FF","#7300E6","#6600CC","#5900B3","#4D0099","#400080","#330066","#26004D","#1A0033"], 
+    brown:["#F2E6E6","#E6CCCC","#D9B3B3","#CC9999","#BF8080","#B36666","#A64D4D","#993333","#8C1A1A","#800000","#730000","#660000","#590000","#4D0000","#400000","#330000","#260000","#1A0000"], 
+    grey:["#FFFFFF","#F2F2F2","#E6E6E6","#D9D9D9","#CCCCCC","#BFBFBF","#B3B3B3","#A6A6A6","#999999","#8C8C8C","#808080","#737373","#666666","#595959","#4D4D4D","#404040","#333333","#1A1A1A"], 
+    black:["#E6E6E6","#CCCCCC","#B3B3B3","#999999","#808080","#666666","#4D4D4D","#333333","#1A1A1A","#000000"],
+ white:["#FFFFFF","#FFFDFC","#FFFBF7","#FFF9F2","#FFF7ED","#FFF5E8","#FFF3E3","#FFF1DE","#FFEFD9","#FFEDD4"]
+};
+
+function showShades(color){
+    const palette = document.getElementById("palette");
+    palette.innerHTML = "";
+
+    shades[color].forEach(shade => {
+        let box = document.createElement("div");
+        box.className = "color-box";
+        box.style.background = shade;
+        box.onclick = () => generateOutfit(shade);
+        palette.appendChild(box);
+    });
+}
+
+function generateOutfit(top){
+    let match = ["#000","#fff","#ffcc00","#00bcd4"];
+    let bottom = match[Math.floor(Math.random()*match.length)];
+
+    document.getElementById("result").innerHTML = `
+        <h2>✨ Custom Outfit</h2>
+        <div class="outfit">
+            <div style="background:${top}"></div>
+            <div style="background:${bottom}"></div>
+        </div>
+    `;
+}
+
+</script>
+
+</body>
+</html>

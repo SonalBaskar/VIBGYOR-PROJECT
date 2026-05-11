@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>VIBGYOR</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    scroll-behavior: smooth;
+}
+
+/* VIDEO */
+#bgVideo {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+
+/* OVERLAY */
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(10,0,30,0.7), rgba(0,40,70,0.7));
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* LOGO */
+.logo{
+    position:fixed;
+    top:15px;
+    left:20px;
+
+    width:110px;
+    height:auto;
+
+    z-index:999;
+}
+/* NAV */
+.nav {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.nav button {
+    display: block;
+    margin: 10px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: none;
+    background: linear-gradient(45deg, #ff6ec4, #7873f5);
+    color: white;
+    cursor: pointer;
+}
+
+/* HERO */
+.hero {
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 50px;
+}
+
+/* LOGIN */
+.login {
+    text-align: center;
+    margin: 40px;
+}
+
+.login button {
+    padding: 14px 50px;
+    font-size: 18px;
+    border-radius: 30px;
+    border: none;
+    background: linear-gradient(45deg, #00c9ff, #92fe9d);
+    cursor: pointer;
+}
+
+/* OPTIONS */
+.options {
+    padding: 120px 20px;
+    margin-top: 100;
+}
+
+.option-box {
+    display: flex;
+    justify-content: space-between;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 20px;
+    background: rgba(245, 5, 205, 0.15);
+    backdrop-filter: blur(10px);
+}
+
+.option-box button {
+    background: white;
+    color: black;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* CONTENT */
+.content-section {
+    padding: 80px 20px;
+}
+
+.content-box {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 25px;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(15px);
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.content-box img {
+    width: 40%;
+    height: 40%;
+    border-radius: 15px;
+    border: 2px solid white;
+}
+
+.content-text {
+    text-align: left;
+}
+
+/* CONTACT */
+.contact {
+    text-align: center;
+    padding: 50px 20px;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+    margin-top: 60px;
+}
+
+.contact h2 {
+    margin-bottom: 20px;
+}
+
+.contact p {
+    margin: 10px 0;
+}
+</style>
+</head>
+
+<body>
+
+<!-- VIDEO -->
+<video autoplay muted loop id="bgVideo">
+    <source src="/static/animation.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<img src="{{ url_for('static', filename='logo.jpeg') }}" alt="VIBGYOR Logo" class="logo">
+
+<div class="nav">
+    <button onclick="scrollOptions()">My Options</button>
+    <button onclick="window.location.href='/signup'">Sign Up</button>
+    <button onclick="goContact()">Contact</button>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+    <div>
+        <h1>AI Fashion Experience</h1>
+        <p>Smart outfit suggestions and recommendation </p>
+    </div>
+</div>
+
+<!-- LOGIN -->
+<div class="login">
+    <button onclick="window.location.href='/login'">LOGIN</button>
+</div>
+
+<!-- OPTIONS -->
+<div id="options" class="options">
+
+    <div class="option-box">
+        <span>👗 Wardrobe-Based Recommendation</span>
+        <button onclick="go('wardrobe')">Explore</button>
+    </div>
+
+    <div class="option-box">
+        <span>🎨 Color Theory-Based Suggestion</span>
+        <button onclick="go('color')">Explore</button>
+    </div>
+
+    <div class="option-box">
+        <span>🤖 Personalized AI Styling</span>
+        <button onclick="go('ai')">Explore</button>
+    </div>
+
+    <div class="option-box">
+        <span>🌦 Mood & Weather Suggestion</span>
+        <button onclick="go('mood')">Explore</button>
+    </div>
+
+    <div class="option-box">
+        <span>📱 Social Sharing</span>
+        <button onclick="go('social')">Explore</button>
+    </div>
+
+</div>
+
+<!-- CONTENT -->
+
+<div id="wardrobe" class="content-section">
+    <div class="content-box">
+        <img src="{{ url_for('static',filename = 'war.jpeg' ) }}">
+        <div class="content-text">
+            <h2>Wardrobe-Based Recommendation</h2>
+            <p>1.The wardrobe-based recommendation system allows users to digitally store their clothing items.<br><br>
+        2.Our AI analyzes each item based on category, color, and usage patterns to intelligently suggest outfit combinations.<br><br>
+        3.This reduces decision fatigue and helps users utilize their existing wardrobe efficiently without unnecessary purchases and
+        the system continuously improves suggestions based on user interactions and preferences.</p>
+        </div>
+    </div>
+</div>
+
+<div id="color" class="content-section">
+    <div class="content-box">
+        <img src="{{ url_for('static',filename = 'colour.jpeg' ) }}">
+        <div class="content-text">
+            <h2>Color Theory-Based Suggestion</h2>
+            <p>1.This feature uses fundamental color theory principles such as complementary, analogous, and triadic color schemes.<br><br>
+        2.The AI ensures that outfit combinations are visually balanced and aesthetically pleasing.<br><br>
+        3.It enhances the user’s fashion sense by recommending combinations that align with professional styling standards,
+        making every outfit visually appealing and well-coordinated.</p>
+        </div>
+    </div>
+</div>
+
+<div id="ai" class="content-section">
+    <div class="content-box">
+        <img src="{{ url_for('static',filename = 'ai style.jpeg' ) }}">
+        <div class="content-text">
+            <h2>AI Styling System</h2>
+            <p>1.The AI styling system learns from user behavior, past outfit selections, and personal preferences.<br><br>
+        2.It builds a unique fashion profile for each user and provides customized recommendations.<br><br>
+        3.Over time, the system adapts to changing tastes and trends, offering highly personalized styling solutions
+        that reflect the user’s individuality and lifestyle.</p>
+        </div>
+    </div>
+</div>
+
+<div id="mood" class="content-section">
+    <div class="content-box">
+        <img src="{{ url_for('static',filename = 'mood.jpeg' ) }}">
+        <div class="content-text">
+            <h2>Mood & Weather Suggestion</h2>
+            <p>1.This feature considers external and emotional factors such as mood, event type, and weather conditions.<br><br>
+        2.The AI dynamically adjusts outfit recommendations to suit formal events, casual outings, or festive occasions.<br><br>
+        3.It also ensures comfort and practicality by aligning clothing choices with real-time weather conditions.</p>
+        </div>
+    </div>
+</div>
+
+<div id="social" class="content-section">
+    <div class="content-box">
+        <img src="{{ url_for('static',filename = 'social.jpeg' ) }}">
+        <div class="content-text">
+            <h2>Social Sharing</h2>
+            <p>1.Users can share their outfit selections within a social platform integrated into the system.<br><br>
+        2.This enables feedback, collaboration, and trend discovery among users.<br><br>
+        3.It creates a community-driven fashion experience where users can inspire each other and stay updated
+        with current styles and popular outfit choices</p>
+        </div>
+    </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact">
+    <h2>Contact Us</h2>
+    <p>📧 vibgyor26@gmail.com</p>
+    <p>📱 +91 98765 43210</p>
+    <p>📸 Instagram: @vibgyor_ai</p>
+    <p>📘 Facebook: Vibgyor AI</p>
+</div>
+
+<script>
+function scrollOptions() {
+    document.getElementById("options").scrollIntoView({behavior: "smooth"});
+}
+
+function go(id) {
+    document.getElementById(id).scrollIntoView({behavior: "smooth"});
+}
+function goSignup() {
+    window.location.href = "/signup";
+}
+
+function goContact() {
+    document.querySelector(".contact").scrollIntoView({behavior: "smooth"});
+}
+function goLogin(){
+    window.location,href = "/login";
+}
+</script>
+
+</body>
+</html>

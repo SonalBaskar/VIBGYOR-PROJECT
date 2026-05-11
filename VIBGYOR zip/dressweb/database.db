@@ -1,0 +1,45 @@
+import pandas as pd
+import random
+
+skin_tones = ["Fair", "Light", "Medium", "Olive", "Brown", "Dark"]
+top_types = ["Shirt", "T-shirt", "Kurti", "Crop Top"]
+colors = ["Red", "Blue", "Green", "Black", "White", "Yellow", "Pink", "Beige", "Maroon"]
+bottom_types = ["Jeans", "Skirt", "Leggings", "Trousers", "Shorts", "Palazzo"]
+occasions = ["Casual", "Party", "Office", "Travel", "Festival", "Date", "College"]
+seasons = ["Summer", "Winter", "All"]
+styles = ["Casual", "Ethnic", "Western", "Formal"]
+
+data = []
+
+for _ in range(1200):   # 👈 1200 rows
+    top_color = random.choice(colors)
+    bottom_color = random.choice(colors)
+
+    # avoid same color (logic add pannom 😎)
+    while bottom_color == top_color:
+        bottom_color = random.choice(colors)
+
+    score = random.randint(6, 10)
+
+    row = [
+        random.choice(skin_tones),
+        random.choice(top_types),
+        top_color,
+        random.choice(bottom_types),
+        bottom_color,
+        random.choice(occasions),
+        random.choice(seasons),
+        random.choice(styles),
+        score
+    ]
+
+    data.append(row)
+
+df = pd.DataFrame(data, columns=[
+    "Skin_Tone", "Top_Type", "Top_Color", "Bottom_Type",
+    "Bottom_Color", "Occasion", "Season", "Style", "Compatibility_Score"
+])
+
+df.to_csv("fashion_dataset_1200.csv", index=False)
+
+print("✅ 1200 rows dataset created!")
